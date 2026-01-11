@@ -29,8 +29,8 @@
 
     .container {
       position: relative;
-      width: 750px;
-      height: 500px;
+      width: min(650px, 95vw);
+      height: min(480px, 90vh);
       border: 4px solid #000;
       box-shadow: 8px 8px 0px 0px #000;
       border-radius: 0;
@@ -364,13 +364,6 @@
 
     body.is-landscape .container {
       display: flex !important;
-      width: 100vw;
-      height: 100vh;
-      max-width: none;
-      max-height: none;
-      border: none;
-      box-shadow: none;
-      transform: none !important;
     }
 
     body.is-landscape .container .form-box {
@@ -384,6 +377,10 @@
 
     body.is-landscape .form-box.Register {
       right: -100%;
+    }
+
+    .mobile-logo {
+      display: none !important;
     }
   </style>
 </head>

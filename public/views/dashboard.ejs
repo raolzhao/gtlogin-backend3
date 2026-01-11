@@ -367,26 +367,26 @@
       display: none !important;
     }
 
-    /* Force Landscape Dimensions for Mobile Reveal (Improved for Android/Small Landscape) */
+    /* Automatic Auto-Scaling for Landscape */
     body.is-landscape .container {
       display: block !important;
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.85);
-      /* Slightly smaller scale for better safety */
-      transform-origin: center center;
-      width: 650px;
-      height: 400px;
+      transform: translate(-50%, -50%);
+
+      /* Scale based on smaller of fixed size vs viewport */
+      width: min(650px, 95vw);
+      height: min(400px, 95vh);
+
       margin: 0;
-      max-width: 95vw;
-      max-height: 95vh;
+      z-index: 1000;
     }
 
-    /* Further adjust for very short screens (like many Android landscape viewports) */
-    @media (max-height: 450px) and (orientation: landscape) {
+    /* Extra scale-down for extremely short screens */
+    @media (max-height: 420px) {
       body.is-landscape .container {
-        transform: translate(-50%, -50%) scale(0.75);
+        transform: translate(-50%, -50%) scale(0.85);
       }
     }
 

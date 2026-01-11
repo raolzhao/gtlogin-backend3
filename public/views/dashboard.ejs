@@ -371,15 +371,15 @@
 
     /* Automatic Auto-Scaling for Landscape */
     body.is-landscape .container {
-      display: block !important;
+      display: flex !important;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
 
-      /* Scale based on smaller of fixed size vs viewport */
-      width: min(650px, 95vw);
-      height: min(400px, 95vh);
+      /* Slightly wider to prevent text overflow */
+      width: min(700px, 95vw);
+      height: min(420px, 95vh);
 
       margin: 0;
       z-index: 1000;

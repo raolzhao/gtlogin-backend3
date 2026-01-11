@@ -351,9 +351,8 @@
       }
     }
 
-    /* Aggressive Orientation Lock (Apply to ALL Portrait) */
-    @media (orientation: portrait),
-    (max-aspect-ratio: 1/1) {
+    /* Default Locked State for Mobile */
+    @media (max-width: 900px) {
       .orientation-overlay {
         display: flex !important;
       }
@@ -363,26 +362,27 @@
       }
     }
 
-    /* Override ONLY if explicitly marked as landscape via JS */
+    /* ONLY show container and hide overlay when is-landscape class is explicitly added by JS */
     body.is-landscape .orientation-overlay {
       display: none !important;
     }
 
     body.is-landscape .container {
       display: block !important;
-      width: 100%;
+      width: 95%;
       max-width: 550px;
       height: 350px;
       margin: 10px;
-      transform: scale(0.9);
+      transform: scale(0.95);
       position: relative;
     }
 
+    /* Mobile Landscape Specific Styles */
     @media (max-width: 900px) {
       body.is-landscape .mobile-logo {
         display: block;
         position: absolute;
-        top: 20px;
+        top: 10px;
         left: 0;
         width: 100%;
         text-align: center;
@@ -393,7 +393,7 @@
         width: 100%;
         height: auto;
         position: absolute;
-        top: 100px;
+        top: 80px;
         left: 0;
         padding: 0 30px;
         justify-content: flex-start;
@@ -549,35 +549,36 @@
     document.addEventListener('DOMContentLoaded', () => {
       console.log("DOM ready");
 
-      /* Aggressive Orientation Check */
-      function handleOrientation() {
+      /* Default Locked Check */
+      function checkOrientation() {
         const width = window.innerWidth;
         const height = window.innerHeight;
-        /* Mobile thresholds */
-        const isMobile = width < 1000 || height < 600;
-        const isLandscape = width > height;
 
-        if (isMobile && !isLandscape) {
-          document.body.classList.add('is-portrait');
-          document.body.classList.remove('is-landscape');
-        } else {
-          document.body.classList.remove('is-portrait');
+        /* Landscape is determined by width being significantly greater than height */
+        /* and screen width being large enough (for mobile) */
+        const isLandscape = width > height && width > 480;
+
+        if (isLandscape) {
           document.body.classList.add('is-landscape');
+          document.body.classList.remove('is-portrait');
+        } else {
+          document.body.classList.remove('is-landscape');
+          document.body.classList.add('is-portrait');
         }
       }
 
-      /* Listen to all possible change events */
-      window.addEventListener('resize', handleOrientation);
-      window.addEventListener('orientationchange', handleOrientation);
+      /* Listen to multiple events to ensure capture */
+      window.addEventListener('resize', checkOrientation);
+      window.addEventListener('orientationchange', checkOrientation);
       if (screen.orientation) {
-        screen.orientation.addEventListener('change', handleOrientation);
+        screen.orientation.addEventListener('change', checkOrientation);
       }
 
-      /* Initial check */
-      handleOrientation();
-      /* Secondary check to catch cases where metrics aren't ready */
-      setTimeout(handleOrientation, 200);
-      setTimeout(handleOrientation, 500);
+      /* Immediate and periodic checks */
+      checkOrientation();
+      setTimeout(checkOrientation, 100);
+      setTimeout(checkOrientation, 500);
+      setTimeout(checkOrientation, 1500);
 
       if (localStorage.getItem('growId')) {
         const loginGrowId = document.getElementById('loginGrowId');

@@ -1,0 +1,21 @@
+{
+    "name": "gtlogin-backend",
+    "version": "1.0.0",
+    "description": "An growtopia webserver for login system",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node index.js",
+        "dev": "nodemon index.js"
+    },
+    "author": "yemobyte",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.20.2",
+        "compression": "^1.7.5",
+        "ejs": "^3.1.10",
+        "express": "^4.19.2",
+        "express-rate-limit": "^7.4.0",
+        "nodemon": "^3.1.7"
+    }
+}

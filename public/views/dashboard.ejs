@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login System</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.webp">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      color: #fff;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: transparent;
+    }
+
+    .container {
+      position: relative;
+      width: 650px;
+      height: 400px;
+      border: 4px solid #000;
+      box-shadow: 8px 8px 0px 0px #000;
+      overflow: hidden;
+      border-radius: 0;
+      background: linear-gradient(135deg, #25252b 50%, #e46033 100%);
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .container .form-box {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 10;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .form-box.Login {
+      left: 0;
+      padding: 0 40px;
+    }
+
+    /* Simplified Animation - Snappier */
+    .form-box.Login .animation {
+      transform: translateX(0);
+      opacity: 1;
+      transition: 0.4s ease;
+    }
+
+    .container.active .form-box.Login {
+      transform: translateX(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .form-box.Register {
+      right: -50%;
+      /* Start off-screen right */
+      padding: 0 40px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .container.active .form-box.Register {
+      right: 0;
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Elements */
+    .form-box h2 {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 3px 3px 0 #000;
+      /* Ensure text color is white for contrast against dark/gradient */
+      color: #fff;
+    }
+
+    .form-box .input-box {
+      position: relative;
+      width: 100%;
+      height: 45px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+
+    .input-box input {
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      border: 3px solid #000;
+      outline: none;
+      font-size: 14px;
+      color: #000;
+      font-weight: 700;
+      padding: 0 15px;
+      box-shadow: 5px 5px 0 #000;
+      transition: 0.2s;
+    }
+
+    .input-box input:focus {
+      transform: translate(2px, 2px);
+      box-shadow: 3px 3px 0 #000;
+      border-color: #e46033;
+    }
+
+    .input-box label {
+      position: absolute;
+      top: -10px;
+      left: 10px;
+      background: #000;
+      color: #fff;
+      border: 1px solid #fff;
+      padding: 1px 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      pointer-events: none;
+    }
+
+    .input-box input:focus~label {
+      background: #e46033;
+      border-color: #000;
+    }
+
+    .input-box box-icon {
+      display: none;
+    }
+
+    .btn {
+      position: relative;
+      width: 100%;
+      height: 40px;
+      background: #e46033;
+      border: 3px solid #000;
+      box-shadow: 5px 5px 0 #000;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-top: 10px;
+      color: #fff;
+      transition: 0.1s;
+    }
+
+    .btn:active {
+      transform: translate(4px, 4px);
+      box-shadow: 1px 1px 0 #000;
+    }
+
+    .regi-link {
+      font-size: 12px;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .regi-link a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 800;
+      background: #fff;
+      padding: 2px 5px;
+      border: 2px solid #000;
+      margin-left: 5px;
+      box-shadow: 3px 3px 0 #000;
+      display: inline-block;
+      transition: 0.2s;
+    }
+
+    .regi-link a:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #000;
+      background: #e46033;
+      color: #fff;
+    }
+
+    /* Info Content (Right Side) */
+    .info-content {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      transition: 0.4s ease-in-out;
+    }
+
+    .info-content.Login {
+      right: 0;
+      text-align: right;
+      padding: 0 40px 0 0;
+      align-items: flex-end;
+    }
+
+    .container.active .info-content.Login {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+
+    .info-content.Register {
+      left: 0;
+      text-align: left;
+      padding: 0 0 0 40px;
+      align-items: flex-start;
+      margin-left: -50%;
+      opacity: 0;
+    }
+
+    .container.active .info-content.Register {
+      margin-left: 0;
+      opacity: 1;
+    }
+
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-container img {
+      width: 160px;
+      height: auto;
+      filter: drop-shadow(4px 4px 0px #000);
+    }
+
+    .info-content h2 {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 26px;
+      font-weight: 900;
+      text-shadow: 3px 3px 0 #000;
+      color: #fff;
+    }
+
+    .info-content p {
+      font-size: 13px;
+      line-height: 1.3;
+      background: #000;
+      color: #fff;
+      padding: 8px;
+      box-shadow: 5px 5px 0 #fff;
+      border: 2px solid #fff;
+    }
+
+    .error-message {
+      position: absolute;
+      bottom: -20px;
+      left: 0;
+      color: #fff;
+      background: #ff0000;
+      border: 2px solid #000;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 5px;
+      opacity: 0;
+      transition: 0.2s;
+    }
+
+    .error-message.show {
+      opacity: 1;
+      bottom: -22px;
+    }
+
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* Mobile Only Logo */
+    .mobile-logo {
+      display: none;
+      text-align: center;
+      margin-bottom: 20px;
+      z-index: 20;
+    }
+
+    .mobile-logo img {
+      width: 150px;
+      height: auto;
+      filter: drop-shadow(4px 4px 0px #000);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .container {
+        width: 100%;
+        max-width: 380px;
+        height: 550px;
+        /* Fixed height for consistency */
+        margin: 20px;
+        background: linear-gradient(135deg, #25252b 50%, #e46033 100%);
+        border: 4px solid #000;
+        box-shadow: 8px 8px 0px 0px #000;
+        position: relative;
+        /* Ensure absolute children position relative to this */
+        display: block;
+        /* Reset from flex to handle absolute positioning easier */
+        padding: 0;
+      }
+
+      .mobile-logo {
+        display: block;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        z-index: 20;
+      }
+
+      .info-content {
+        display: none !important;
+      }
+
+      /* Both forms absolute, positioned below logo */
+      .container .form-box {
+        width: 100%;
+        height: auto;
+        position: absolute;
+        top: 140px;
+        /* Push down below logo */
+        left: 0;
+        padding: 0 30px;
+        justify-content: flex-start;
+        transition: 0.3s ease-in-out;
+      }
+
+      .form-box.Login {
+        z-index: 15;
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .container.active .form-box.Login {
+        opacity: 0;
+        transform: translateY(-20px);
+        pointer-events: none;
+      }
+
+      .form-box.Register {
+        z-index: 15;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        right: auto;
+        /* Reset desktop styles */
+        padding-top: 0;
+      }
+
+      .container.active .form-box.Register {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* Reset animations regarding transforms that might conflict */
+      .form-box.Login .animation,
+      .form-box.Register .animation {
+        transform: none !important;
+        transition: none !important;
+        opacity: 1 !important;
+        filter: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="mobile-logo">
+      <img src="/game_title.png" alt="Game Title">
+    </div>
+
+    <!-- Login Form -->
+    <div class="form-box Login">
+      <h2 class="animation" style="--D:0; --S:21">Login</h2>
+      <form method="post" action="/player/growid/login/validate" id="loginForm">
+        <input name="type" value="log" type="hidden" />
+        <input name="_token" value="<%= JSON.stringify(data) %>" type="hidden" />
+
+        <div class="input-box animation" style="--D:1; --S:22">
+          <input type="text" name="growId" id="loginGrowId" required>
+          <label for="loginGrowId">GrowID</label>
+          <box-icon type='solid' name='user' color="gray"></box-icon>
+          <div class="error-message" id="loginUsernameError"></div>
+        </div>
+
+        <div class="input-box animation" style="--D:2; --S:23">
+          <input type="password" name="password" id="loginPassword" required>
+          <label for="loginPassword">Password</label>
+          <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
+          <div class="error-message" id="loginPasswordError"></div>
+        </div>
+
+        <div class="animation" style="--D:3; --S:24">
+          <button type="submit" id="loginButton" class="btn">Login</button>
+        </div>
+
+        <div class="regi-link animation" style="--D:4; --S:25">
+          <p>Don't have an account? <br> <a href="#" class="SignUpLink">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="info-content Login">
+      <div class="logo-container">
+        <img src="/game_title.png" alt="Game Title Name">
+      </div>
+      <h2 class="animation" style="--D:0; --S:20">WELCOME BACK!</h2>
+      <p class="animation" style="--D:1; --S:21">We are happy to have you with us again. If you need anything, we are
+        here to help.</p>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="form-box Register">
+      <h2 class="animation" style="--li:17; --S:0">Register</h2>
+      <form method="post" action="/player/growid/login/validate" id="regisForm">
+        <input name="type" value="reg" type="hidden" />
+        <input name="_token" value="<%= JSON.stringify(data) %>" type="hidden" />
+
+        <div class="input-box animation" style="--li:18; --S:1">
+          <input type="text" name="growId" id="regisGrowId" required>
+          <label for="regisGrowId">GrowID</label>
+          <box-icon type='solid' name='user' color="gray"></box-icon>
+          <div class="error-message" id="regisUsernameError"></div>
+        </div>
+
+        <div class="input-box animation" style="--li:19; --S:2">
+          <input type="email" name="email" id="regisEmail" required>
+          <label for="regisEmail">Email</label>
+          <box-icon name='envelope' type='solid' color="gray"></box-icon>
+          <div class="error-message" id="regisEmailError"></div>
+        </div>
+
+        <div class="input-box animation" style="--li:19; --S:3">
+          <input type="password" name="password" id="regisPassword" required>
+          <label for="regisPassword">Password</label>
+          <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
+          <div class="error-message" id="regisPasswordError"></div>
+        </div>
+
+        <div class="animation" style="--li:20; --S:4">
+          <button type="submit" id="regisButton" class="btn">Register</button>
+        </div>
+
+        <div class="regi-link animation" style="--li:21; --S:5">
+          <p>Already have an account? <br> <a href="#" class="SignInLink">Sign In</a></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="info-content Register">
+      <div class="logo-container">
+        <img src="/game_title.png" alt="Game Title Name">
+      </div>
+      <h2 class="animation" style="--D:0; --S:20">WELCOME!</h2>
+      <p class="animation" style="--li:18; --S:1">We're delighted to have you here. If you need any assistance, feel
+        free to reach out.</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log("DOM ready");
+
+      if (localStorage.getItem('growId')) {
+        const loginGrowId = document.getElementById('loginGrowId');
+        if (loginGrowId) {
+          loginGrowId.value = localStorage.getItem('growId');
+        }
+      }
+
+
+      const validateUsername = (username, errorElement) => {
+        if (!username) {
+          showValidationError(errorElement, 'Please enter username');
+          return false;
+        } else if (username.length < 4) {
+          showValidationError(errorElement, 'Minimum 4 characters');
+          return false;
+        } else if (!/^[a-zA-Z0-9]+$/.test(username)) {
+          showValidationError(errorElement, 'Invalid input username');
+          return false;
+        } else if (username.length > 20) {
+          showValidationError(errorElement, 'Maximum 20 characters');
+          return false;
+        }
+        return true;
+      };
+
+      const validatePassword = (password, errorElement) => {
+        if (!password) {
+          showValidationError(errorElement, 'Please enter password');
+          return false;
+        } else if (password.length < 6) {
+          showValidationError(errorElement, 'Minimum 6 characters');
+          return false;
+        }
+        return true;
+      };
+
+      const validateEmail = (email, errorElement) => {
+        if (!email) {
+          showValidationError(errorElement, 'Please enter email');
+          return false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+          showValidationError(errorElement, 'Invalid email format');
+          return false;
+        }
+        return true;
+      };
+
+      const showValidationError = (errorElement, message) => {
+        if (errorElement) {
+          errorElement.innerHTML = message;
+          errorElement.classList.add('show');
+        }
+      };
+
+      function resetErrors(formId) {
+        const form = document.getElementById(formId);
+        const errorMessages = form.querySelectorAll('.error-message');
+        errorMessages.forEach(error => {
+          error.classList.remove('show');
+        });
+      }
+
+
+      const form_regis = document.getElementById('regisForm');
+      if (form_regis) {
+        form_regis.addEventListener('submit', function (e) {
+          e.preventDefault();
+          console.log("Register form submitted");
+
+          const uName = document.getElementById('regisGrowId')?.value.trim();
+          const uPass = document.getElementById('regisPassword')?.value.trim();
+          const uEmail = document.getElementById('regisEmail')?.value.trim();
+
+          resetErrors('regisForm');
+
+          const isUsernameValid = validateUsername(uName, document.getElementById('regisUsernameError'));
+          const isPasswordValid = validatePassword(uPass, document.getElementById('regisPasswordError'));
+          const isEmailValid = validateEmail(uEmail, document.getElementById('regisEmailError'));
+
+          if (isUsernameValid && isPasswordValid && isEmailValid) {
+            const regisButton = document.getElementById("regisButton");
+            regisButton.textContent = "Registering...";
+            regisButton.classList.add("loading");
+
+            setTimeout(function () {
+              form_regis.submit();
+              localStorage.setItem('tempGrowId', uName);
+              regisButton.textContent = "Register";
+              regisButton.classList.remove("loading");
+            }, 2000);
+          }
+        });
+
+        form_regis.querySelectorAll('input').forEach(input => {
+          input.addEventListener('input', function () {
+            const errorElement = this.parentElement.querySelector('.error-message');
+            if (errorElement && errorElement.classList.contains('error-message')) {
+              errorElement.classList.remove('show');
+            }
+          });
+        });
+      }
+
+
+      const form_login = document.getElementById('loginForm');
+      if (form_login) {
+        form_login.addEventListener('submit', async function (e) {
+          e.preventDefault();
+          console.log("Login form submitted");
+
+          const growId = document.getElementById('loginGrowId')?.value.trim();
+          const password = document.getElementById('loginPassword')?.value.trim();
+
+          resetErrors('loginForm');
+
+          const isUsernameValid = validateUsername(growId, document.getElementById('loginUsernameError'));
+          const isPasswordValid = validatePassword(password, document.getElementById('loginPasswordError'));
+
+          if (isUsernameValid && isPasswordValid) {
+            const loginButton = document.getElementById("loginButton");
+            loginButton.textContent = "Logging in...";
+            loginButton.classList.add("loading");
+
+            setTimeout(function () {
+              form_login.submit();
+              localStorage.setItem('growId', growId);
+              loginButton.textContent = "Login";
+              loginButton.classList.remove("loading");
+            }, 2000);
+          }
+        });
+        form_login.querySelectorAll('input').forEach(input => {
+          input.addEventListener('input', function () {
+            const errorElement = this.parentElement.querySelector('.error-message');
+            if (errorElement && errorElement.classList.contains('error-message')) {
+              errorElement.classList.remove('show');
+            }
+          });
+        });
+      }
+
+
+      const container = document.querySelector(".container");
+      const registerBtn = document.querySelector(".SignUpLink");
+      const loginBtn = document.querySelector(".SignInLink");
+
+      if (container && registerBtn && loginBtn) {
+        registerBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          container.classList.add("active");
+          resetErrors('regisForm');
+        });
+
+        loginBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          container.classList.remove("active");
+          resetErrors('loginForm');
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

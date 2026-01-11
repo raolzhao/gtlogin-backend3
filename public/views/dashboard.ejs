@@ -29,7 +29,7 @@
     .container {
       position: relative;
       width: 650px;
-      height: 400px;
+      height: 480px;
       border: 4px solid #000;
       box-shadow: 8px 8px 0px 0px #000;
       border-radius: 0;
@@ -57,7 +57,6 @@
       padding: 0 40px;
     }
 
-    /* Simplified Animation - Snappier */
     .form-box.Login .animation {
       transform: translateX(0);
       opacity: 1;
@@ -72,7 +71,6 @@
 
     .form-box.Register {
       right: -50%;
-      /* Start off-screen right */
       padding: 0 40px;
       opacity: 0;
       pointer-events: none;
@@ -84,7 +82,6 @@
       pointer-events: auto;
     }
 
-    /* Elements */
     .form-box h2 {
       font-size: 32px;
       text-align: center;
@@ -92,7 +89,6 @@
       font-weight: 900;
       text-transform: uppercase;
       text-shadow: 3px 3px 0 #000;
-      /* Ensure text color is white for contrast against dark/gradient */
       color: #fff;
     }
 
@@ -194,7 +190,6 @@
       color: #fff;
     }
 
-    /* Info Content (Right Side) */
     .info-content {
       position: absolute;
       top: 0;
@@ -287,7 +282,6 @@
       pointer-events: none;
     }
 
-    /* Mobile Only Logo */
     .mobile-logo {
       display: none;
       text-align: center;
@@ -301,7 +295,6 @@
       filter: drop-shadow(4px 4px 0px #000);
     }
 
-    /* Orientation Lock Overlay */
     .orientation-overlay {
       display: none;
       position: fixed;
@@ -353,7 +346,6 @@
       }
     }
 
-    /* Lock by default on mobile */
     @media (max-width: 900px) {
       .orientation-overlay {
         display: flex !important;
@@ -364,35 +356,28 @@
       }
     }
 
-    /* Reveal only on landscape via JS class */
     body.is-landscape .orientation-overlay {
       display: none !important;
     }
 
-    /* Automatic Auto-Scaling for Landscape */
     body.is-landscape .container {
       display: flex !important;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-
-      /* Slightly wider to prevent text overflow */
       width: min(700px, 95vw);
-      height: min(420px, 95vh);
-
+      height: min(480px, 95vh);
       margin: 0;
       z-index: 1000;
     }
 
-    /* Extra scale-down for extremely short screens */
-    @media (max-height: 420px) {
+    @media (max-height: 480px) {
       body.is-landscape .container {
         transform: translate(-50%, -50%) scale(0.85);
       }
     }
 
-    /* Mobile Logo should probably still be hidden if we are using the full desktop layout */
     .mobile-logo {
       display: none !important;
     }
@@ -412,7 +397,6 @@
       <img src="/game_title.png" alt="Game Title">
     </div>
 
-    <!-- Login Form -->
     <div class="form-box Login">
       <h2 class="animation" style="--D:0; --S:21">Login</h2>
       <form method="post" action="/player/growid/login/validate" id="loginForm">
@@ -452,7 +436,6 @@
         here to help.</p>
     </div>
 
-    <!-- Registration Form -->
     <div class="form-box Register">
       <h2 class="animation" style="--li:17; --S:0">Register</h2>
       <form method="post" action="/player/growid/login/validate" id="regisForm">
@@ -503,7 +486,6 @@
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      console.log("DOM ready");      /* Orientation Lock Logic */
       function checkOrientation() {
         const isLandscape = window.innerWidth > window.innerHeight && window.innerWidth > 480;
         if (isLandscape) {
@@ -586,7 +568,6 @@
       if (form_regis) {
         form_regis.addEventListener('submit', function (e) {
           e.preventDefault();
-          console.log("Register form submitted");
 
           const uName = document.getElementById('regisGrowId')?.value.trim();
           const uPass = document.getElementById('regisPassword')?.value.trim();
@@ -627,7 +608,6 @@
       if (form_login) {
         form_login.addEventListener('submit', async function (e) {
           e.preventDefault();
-          console.log("Login form submitted");
 
           const growId = document.getElementById('loginGrowId')?.value.trim();
           const password = document.getElementById('loginPassword')?.value.trim();

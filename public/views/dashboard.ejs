@@ -29,10 +29,8 @@
 
     .container {
       position: relative;
-      width: 100%;
-      max-width: 700px;
-      height: 100%;
-      max-height: 480px;
+      width: 650px;
+      height: 480px;
       border: 4px solid #000;
       box-shadow: 8px 8px 0px 0px #000;
       border-radius: 0;
@@ -56,7 +54,7 @@
 
     .form-box.Login {
       left: 0;
-      padding: 0 30px;
+      padding: 0 40px;
     }
 
     .form-box.Login .animation {
@@ -73,7 +71,7 @@
 
     .form-box.Register {
       right: -50%;
-      padding: 0 30px;
+      padding: 0 40px;
       opacity: 0;
       pointer-events: none;
     }
@@ -85,7 +83,7 @@
     }
 
     .form-box h2 {
-      font-size: 28px;
+      font-size: 32px;
       text-align: center;
       margin-bottom: 15px;
       font-weight: 900;
@@ -97,9 +95,9 @@
     .form-box .input-box {
       position: relative;
       width: 100%;
-      height: 40px;
+      height: 45px;
       margin-top: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
     }
 
     .input-box input {
@@ -108,17 +106,17 @@
       background: #fff;
       border: 3px solid #000;
       outline: none;
-      font-size: 13px;
+      font-size: 14px;
       color: #000;
       font-weight: 700;
-      padding: 0 12px;
-      box-shadow: 4px 4px 0 #000;
+      padding: 0 15px;
+      box-shadow: 5px 5px 0 #000;
       transition: 0.2s;
     }
 
     .input-box input:focus {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 #000;
+      box-shadow: 3px 3px 0 #000;
       border-color: #e46033;
     }
 
@@ -130,7 +128,7 @@
       color: #fff;
       border: 1px solid #fff;
       padding: 1px 6px;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       pointer-events: none;
@@ -151,9 +149,9 @@
       height: 40px;
       background: #e46033;
       border: 3px solid #000;
-      box-shadow: 4px 4px 0 #000;
+      box-shadow: 5px 5px 0 #000;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 900;
       text-transform: uppercase;
       margin-top: 10px;
@@ -167,9 +165,9 @@
     }
 
     .regi-link {
-      font-size: 11px;
+      font-size: 12px;
       text-align: center;
-      margin-top: 12px;
+      margin-top: 15px;
     }
 
     .regi-link a {
@@ -180,13 +178,13 @@
       padding: 2px 5px;
       border: 2px solid #000;
       margin-left: 5px;
-      box-shadow: 2px 2px 0 #000;
+      box-shadow: 3px 3px 0 #000;
       display: inline-block;
       transition: 0.2s;
     }
 
     .regi-link a:hover {
-      transform: translate(1px, 1px);
+      transform: translate(2px, 2px);
       box-shadow: 1px 1px 0 #000;
       background: #e46033;
       color: #fff;
@@ -206,7 +204,7 @@
     .info-content.Login {
       right: 0;
       text-align: right;
-      padding: 0 25px 0 0;
+      padding: 0 40px 0 0;
       align-items: flex-end;
     }
 
@@ -218,7 +216,7 @@
     .info-content.Register {
       left: 0;
       text-align: left;
-      padding: 0 0 0 25px;
+      padding: 0 0 0 40px;
       align-items: flex-start;
       margin-left: -50%;
       opacity: 0;
@@ -232,51 +230,51 @@
     .logo-container {
       display: flex;
       justify-content: center;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.5rem;
     }
 
     .logo-container img {
-      width: 140px;
+      width: 160px;
       height: auto;
-      filter: drop-shadow(3px 3px 0px #000);
+      filter: drop-shadow(4px 4px 0px #000);
     }
 
     .info-content h2 {
       margin-top: 0;
       margin-bottom: 5px;
-      font-size: 22px;
+      font-size: 26px;
       font-weight: 900;
-      text-shadow: 2px 2px 0 #000;
+      text-shadow: 3px 3px 0 #000;
       color: #fff;
     }
 
     .info-content p {
-      font-size: 11px;
+      font-size: 13px;
       line-height: 1.3;
       background: #000;
       color: #fff;
-      padding: 6px;
-      box-shadow: 4px 4px 0 #fff;
+      padding: 8px;
+      box-shadow: 5px 5px 0 #fff;
       border: 2px solid #fff;
     }
 
     .error-message {
       position: absolute;
-      bottom: -18px;
+      bottom: -20px;
       left: 0;
       color: #fff;
       background: #ff0000;
       border: 2px solid #000;
-      font-size: 9px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 1px 4px;
+      padding: 2px 5px;
       opacity: 0;
       transition: 0.2s;
     }
 
     .error-message.show {
       opacity: 1;
-      bottom: -20px;
+      bottom: -22px;
     }
 
     .loading {
@@ -284,55 +282,153 @@
       pointer-events: none;
     }
 
-    @media (max-width: 600px) {
+    .mobile-logo {
+      display: none;
+      text-align: center;
+      margin-bottom: 20px;
+      z-index: 20;
+    }
+
+    .mobile-logo img {
+      width: 150px;
+      height: auto;
+      filter: drop-shadow(4px 4px 0px #000);
+    }
+
+    .orientation-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #25252b;
+      z-index: 9999;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .orientation-overlay i {
+      font-size: 80px;
+      color: #e46033;
+      margin-bottom: 20px;
+      animation: rotateDevice 2s ease-in-out infinite;
+    }
+
+    .orientation-overlay h2 {
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 0 #000;
+      margin-bottom: 10px;
+    }
+
+    .orientation-overlay p {
+      background: #000;
+      padding: 5px 10px;
+      border: 2px solid #fff;
+      box-shadow: 4px 4px 0 #e46033;
+      font-weight: 600;
+    }
+
+    @keyframes rotateDevice {
+
+      0%,
+      100% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .orientation-overlay {
+        display: flex !important;
+      }
+
       .container {
-        max-height: none;
-        height: 100vh;
-        border: none;
-        box-shadow: none;
+        display: none !important;
       }
+    }
 
-      .info-content {
-        display: none;
-      }
+    body.is-landscape .orientation-overlay {
+      display: none !important;
+    }
 
-      .container .form-box {
-        width: 100%;
-        padding: 0 20px;
-      }
+    body.is-landscape .container {
+      display: flex !important;
+    }
 
-      .form-box.Register {
-        right: -100%;
+    @media screen and (max-width: 700px),
+    screen and (max-height: 500px) {
+      .container {
+        transform: scale(0.75);
       }
+    }
+
+    @media screen and (max-width: 480px),
+    screen and (max-height: 400px) {
+      .container {
+        transform: scale(0.65);
+      }
+    }
+
+    @media screen and (max-width: 360px),
+    screen and (max-height: 320px) {
+      .container {
+        transform: scale(0.55);
+      }
+    }
+
+    .mobile-logo {
+      display: none !important;
     }
   </style>
 </head>
 
 <body>
+  <div class="orientation-overlay">
+    <i class='bx bx-mobile-landscape'></i>
+    <h2>Landscape Mode Required</h2>
+    <p>Please rotate your device to use the system.</p>
+  </div>
+
   <div class="container">
+
+    <div class="mobile-logo">
+      <img src="/game_title.png" alt="Game Title">
+    </div>
+
     <div class="form-box Login">
-      <h2 class="animation">Login</h2>
+      <h2 class="animation" style="--D:0; --S:21">Login</h2>
       <form method="post" action="/player/growid/login/validate" id="loginForm">
         <input name="type" value="log" type="hidden" />
         <input name="_token" value="<%= JSON.stringify(data) %>" type="hidden" />
 
-        <div class="input-box animation">
+        <div class="input-box animation" style="--D:1; --S:22">
           <input type="text" name="growId" id="loginGrowId" required>
           <label for="loginGrowId">GrowID</label>
+          <box-icon type='solid' name='user' color="gray"></box-icon>
           <div class="error-message" id="loginUsernameError"></div>
         </div>
 
-        <div class="input-box animation">
+        <div class="input-box animation" style="--D:2; --S:23">
           <input type="password" name="password" id="loginPassword" required>
           <label for="loginPassword">Password</label>
+          <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
           <div class="error-message" id="loginPasswordError"></div>
         </div>
 
-        <div class="animation">
+        <div class="animation" style="--D:3; --S:24">
           <button type="submit" id="loginButton" class="btn">Login</button>
         </div>
 
-        <div class="regi-link animation">
+        <div class="regi-link animation" style="--D:4; --S:25">
           <p>Don't have an account? <br> <a href="#" class="SignUpLink">Sign Up</a></p>
         </div>
       </form>
@@ -340,41 +436,45 @@
 
     <div class="info-content Login">
       <div class="logo-container">
-        <img src="/game_title.png" alt="Game Title">
+        <img src="/game_title.png" alt="Game Title Name">
       </div>
-      <h2>WELCOME BACK!</h2>
-      <p>Happy to have you with us again.</p>
+      <h2 class="animation" style="--D:0; --S:20">WELCOME BACK!</h2>
+      <p class="animation" style="--D:1; --S:21">We are happy to have you with us again. If you need anything, we are
+        here to help.</p>
     </div>
 
     <div class="form-box Register">
-      <h2 class="animation">Register</h2>
+      <h2 class="animation" style="--li:17; --S:0">Register</h2>
       <form method="post" action="/player/growid/login/validate" id="regisForm">
         <input name="type" value="reg" type="hidden" />
         <input name="_token" value="<%= JSON.stringify(data) %>" type="hidden" />
 
-        <div class="input-box animation">
+        <div class="input-box animation" style="--li:18; --S:1">
           <input type="text" name="growId" id="regisGrowId" required>
           <label for="regisGrowId">GrowID</label>
+          <box-icon type='solid' name='user' color="gray"></box-icon>
           <div class="error-message" id="regisUsernameError"></div>
         </div>
 
-        <div class="input-box animation">
+        <div class="input-box animation" style="--li:19; --S:2">
           <input type="email" name="email" id="regisEmail" required>
           <label for="regisEmail">Email</label>
+          <box-icon name='envelope' type='solid' color="gray"></box-icon>
           <div class="error-message" id="regisEmailError"></div>
         </div>
 
-        <div class="input-box animation">
+        <div class="input-box animation" style="--li:19; --S:3">
           <input type="password" name="password" id="regisPassword" required>
           <label for="regisPassword">Password</label>
+          <box-icon name='lock-alt' type='solid' color="gray"></box-icon>
           <div class="error-message" id="regisPasswordError"></div>
         </div>
 
-        <div class="animation">
+        <div class="animation" style="--li:20; --S:4">
           <button type="submit" id="regisButton" class="btn">Register</button>
         </div>
 
-        <div class="regi-link animation">
+        <div class="regi-link animation" style="--li:21; --S:5">
           <p>Already have an account? <br> <a href="#" class="SignInLink">Sign In</a></p>
         </div>
       </form>
@@ -382,16 +482,32 @@
 
     <div class="info-content Register">
       <div class="logo-container">
-        <img src="/game_title.png" alt="Game Title">
+        <img src="/game_title.png" alt="Game Title Name">
       </div>
-      <h2>WELCOME!</h2>
-      <p>Delighted to have you here.</p>
+      <h2 class="animation" style="--D:0; --S:20">WELCOME!</h2>
+      <p class="animation" style="--li:18; --S:1">We're delighted to have you here. If you need any assistance, feel
+        free to reach out.</p>
     </div>
   </div>
 
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      function checkOrientation() {
+        const isLandscape = window.innerWidth > window.innerHeight && window.innerWidth > 480;
+        if (isLandscape) {
+          document.body.classList.add('is-landscape');
+        } else {
+          document.body.classList.remove('is-landscape');
+        }
+      }
+      window.addEventListener('resize', checkOrientation);
+      window.addEventListener('orientationchange', checkOrientation);
+      checkOrientation();
+      setTimeout(checkOrientation, 200);
+      setTimeout(checkOrientation, 500);
+
+
       if (localStorage.getItem('growId')) {
         const loginGrowId = document.getElementById('loginGrowId');
         if (loginGrowId) {
@@ -399,15 +515,19 @@
         }
       }
 
+
       const validateUsername = (username, errorElement) => {
         if (!username) {
-          showValidationError(errorElement, 'Enter username');
+          showValidationError(errorElement, 'Please enter username');
           return false;
         } else if (username.length < 4) {
-          showValidationError(errorElement, 'Min 4 chars');
+          showValidationError(errorElement, 'Minimum 4 characters');
           return false;
         } else if (!/^[a-zA-Z0-9]+$/.test(username)) {
-          showValidationError(errorElement, 'Invalid username');
+          showValidationError(errorElement, 'Invalid input username');
+          return false;
+        } else if (username.length > 20) {
+          showValidationError(errorElement, 'Maximum 20 characters');
           return false;
         }
         return true;
@@ -415,10 +535,10 @@
 
       const validatePassword = (password, errorElement) => {
         if (!password) {
-          showValidationError(errorElement, 'Enter password');
+          showValidationError(errorElement, 'Please enter password');
           return false;
         } else if (password.length < 6) {
-          showValidationError(errorElement, 'Min 6 chars');
+          showValidationError(errorElement, 'Minimum 6 characters');
           return false;
         }
         return true;
@@ -426,10 +546,10 @@
 
       const validateEmail = (email, errorElement) => {
         if (!email) {
-          showValidationError(errorElement, 'Enter email');
+          showValidationError(errorElement, 'Please enter email');
           return false;
         } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-          showValidationError(errorElement, 'Invalid format');
+          showValidationError(errorElement, 'Invalid email format');
           return false;
         }
         return true;
@@ -450,47 +570,83 @@
         });
       }
 
+
       const form_regis = document.getElementById('regisForm');
       if (form_regis) {
         form_regis.addEventListener('submit', function (e) {
           e.preventDefault();
+
           const uName = document.getElementById('regisGrowId')?.value.trim();
           const uPass = document.getElementById('regisPassword')?.value.trim();
           const uEmail = document.getElementById('regisEmail')?.value.trim();
+
           resetErrors('regisForm');
-          if (validateUsername(uName, document.getElementById('regisUsernameError')) &&
-            validatePassword(uPass, document.getElementById('regisPasswordError')) &&
-            validateEmail(uEmail, document.getElementById('regisEmailError'))) {
-            const btn = document.getElementById("regisButton");
-            btn.textContent = "Processing...";
-            btn.classList.add("loading");
-            setTimeout(() => {
+
+          const isUsernameValid = validateUsername(uName, document.getElementById('regisUsernameError'));
+          const isPasswordValid = validatePassword(uPass, document.getElementById('regisPasswordError'));
+          const isEmailValid = validateEmail(uEmail, document.getElementById('regisEmailError'));
+
+          if (isUsernameValid && isPasswordValid && isEmailValid) {
+            const regisButton = document.getElementById("regisButton");
+            regisButton.textContent = "Registering...";
+            regisButton.classList.add("loading");
+
+            setTimeout(function () {
               form_regis.submit();
               localStorage.setItem('tempGrowId', uName);
-            }, 1000);
+              regisButton.textContent = "Register";
+              regisButton.classList.remove("loading");
+            }, 2000);
           }
+        });
+
+        form_regis.querySelectorAll('input').forEach(input => {
+          input.addEventListener('input', function () {
+            const errorElement = this.parentElement.querySelector('.error-message');
+            if (errorElement && errorElement.classList.contains('error-message')) {
+              errorElement.classList.remove('show');
+            }
+          });
         });
       }
 
+
       const form_login = document.getElementById('loginForm');
       if (form_login) {
-        form_login.addEventListener('submit', function (e) {
+        form_login.addEventListener('submit', async function (e) {
           e.preventDefault();
+
           const growId = document.getElementById('loginGrowId')?.value.trim();
           const password = document.getElementById('loginPassword')?.value.trim();
+
           resetErrors('loginForm');
-          if (validateUsername(growId, document.getElementById('loginUsernameError')) &&
-            validatePassword(password, document.getElementById('loginPasswordError'))) {
-            const btn = document.getElementById("loginButton");
-            btn.textContent = "Logging in...";
-            btn.classList.add("loading");
-            setTimeout(() => {
+
+          const isUsernameValid = validateUsername(growId, document.getElementById('loginUsernameError'));
+          const isPasswordValid = validatePassword(password, document.getElementById('loginPasswordError'));
+
+          if (isUsernameValid && isPasswordValid) {
+            const loginButton = document.getElementById("loginButton");
+            loginButton.textContent = "Logging in...";
+            loginButton.classList.add("loading");
+
+            setTimeout(function () {
               form_login.submit();
               localStorage.setItem('growId', growId);
-            }, 1000);
+              loginButton.textContent = "Login";
+              loginButton.classList.remove("loading");
+            }, 2000);
           }
         });
+        form_login.querySelectorAll('input').forEach(input => {
+          input.addEventListener('input', function () {
+            const errorElement = this.parentElement.querySelector('.error-message');
+            if (errorElement && errorElement.classList.contains('error-message')) {
+              errorElement.classList.remove('show');
+            }
+          });
+        });
       }
+
 
       const container = document.querySelector(".container");
       const registerBtn = document.querySelector(".SignUpLink");
@@ -502,6 +658,7 @@
           container.classList.add("active");
           resetErrors('regisForm');
         });
+
         loginBtn.addEventListener("click", (e) => {
           e.preventDefault();
           container.classList.remove("active");

@@ -351,7 +351,7 @@
       }
     }
 
-    /* Default Locked State for Mobile */
+    /* Lock by default on mobile */
     @media (max-width: 900px) {
       .orientation-overlay {
         display: flex !important;
@@ -362,83 +362,29 @@
       }
     }
 
-    /* ONLY show container and hide overlay when is-landscape class is explicitly added by JS */
+    /* Reveal only on landscape via JS class */
     body.is-landscape .orientation-overlay {
       display: none !important;
     }
 
+    /* Force Landscape Dimensions for Mobile Reveal */
     body.is-landscape .container {
       display: block !important;
-      width: 95%;
-      max-width: 550px;
-      height: 350px;
-      margin: 10px;
-      transform: scale(0.95);
       position: relative;
+      /* Prevent the container from being larger than the screen while keeping aspect ratio */
+      max-width: 90vw;
+      max-height: 90vh;
+      width: 650px;
+      height: 400px;
+      /* Center it */
+      margin: auto;
+      transform: scale(0.9);
+      transform-origin: center;
     }
 
-    /* Mobile Landscape Specific Styles */
-    @media (max-width: 900px) {
-      body.is-landscape .mobile-logo {
-        display: block;
-        position: absolute;
-        top: 10px;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        z-index: 20;
-      }
-
-      body.is-landscape .container .form-box {
-        width: 100%;
-        height: auto;
-        position: absolute;
-        top: 80px;
-        left: 0;
-        padding: 0 30px;
-        justify-content: flex-start;
-        transition: 0.3s ease-in-out;
-      }
-
-      body.is-landscape .info-content {
-        display: none !important;
-      }
-
-      body.is-landscape .form-box.Login {
-        z-index: 15;
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      body.is-landscape .container.active .form-box.Login {
-        opacity: 0;
-        transform: translateY(-20px);
-        pointer-events: none;
-      }
-
-      body.is-landscape .form-box.Register {
-        z-index: 15;
-        opacity: 0;
-        transform: translateY(20px);
-        pointer-events: none;
-        right: auto;
-        padding-top: 0;
-      }
-
-      body.is-landscape .container.active .form-box.Register {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      body.is-landscape .form-box.Login .animation,
-      body.is-landscape .form-box.Register .animation {
-        transform: none !important;
-        transition: none !important;
-        opacity: 1 !important;
-        filter: none !important;
-      }
+    /* Mobile Logo should probably still be hidden if we are using the full desktop layout */
+    .mobile-logo {
+      display: none !important;
     }
   </style>
 </head>
@@ -547,38 +493,21 @@
   <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      console.log("DOM ready");
-
-      /* Default Locked Check */
+      console.log("DOM ready");      /* Orientation Lock Logic */
       function checkOrientation() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-
-        /* Landscape is determined by width being significantly greater than height */
-        /* and screen width being large enough (for mobile) */
-        const isLandscape = width > height && width > 480;
-
+        const isLandscape = window.innerWidth > window.innerHeight && window.innerWidth > 480;
         if (isLandscape) {
           document.body.classList.add('is-landscape');
-          document.body.classList.remove('is-portrait');
         } else {
           document.body.classList.remove('is-landscape');
-          document.body.classList.add('is-portrait');
         }
       }
-
-      /* Listen to multiple events to ensure capture */
       window.addEventListener('resize', checkOrientation);
       window.addEventListener('orientationchange', checkOrientation);
-      if (screen.orientation) {
-        screen.orientation.addEventListener('change', checkOrientation);
-      }
-
-      /* Immediate and periodic checks */
       checkOrientation();
-      setTimeout(checkOrientation, 100);
+      setTimeout(checkOrientation, 200);
       setTimeout(checkOrientation, 500);
-      setTimeout(checkOrientation, 1500);
+
 
       if (localStorage.getItem('growId')) {
         const loginGrowId = document.getElementById('loginGrowId');

@@ -35,7 +35,6 @@ app.use(express.json());
 app.use(rateLimiter({ windowMs: 5 * 60 * 1000, max: 800, headers: true }));
 
 app.all('/favicon.ico', function (req, res) {
-    /* Handle favicon request */
 });
 
 app.all('/player/register', function (req, res) {

@@ -351,39 +351,35 @@
       }
     }
 
-    /* Force Overlay state via Class */
-    body.is-portrait .orientation-overlay {
-      display: flex !important;
-    }
-
-    body.is-portrait .container {
-      display: none !important;
-    }
-
-    /* Robust Media Query Detection */
+    /* Aggressive Orientation Lock (Apply to ALL Portrait) */
     @media (orientation: portrait),
     (max-aspect-ratio: 1/1) {
-      body:not(.is-landscape) .orientation-overlay {
-        display: flex;
+      .orientation-overlay {
+        display: flex !important;
       }
 
-      body:not(.is-landscape) .container {
+      .container {
         display: none !important;
       }
     }
 
-    /* Mobile Landscape: Scale and Position */
-    @media (max-width: 900px) and (orientation: landscape) {
-      .container {
-        width: 100%;
-        max-width: 550px;
-        height: 350px;
-        margin: 10px;
-        display: block;
-        transform: scale(0.9);
-      }
+    /* Override ONLY if explicitly marked as landscape via JS */
+    body.is-landscape .orientation-overlay {
+      display: none !important;
+    }
 
-      .mobile-logo {
+    body.is-landscape .container {
+      display: block !important;
+      width: 100%;
+      max-width: 550px;
+      height: 350px;
+      margin: 10px;
+      transform: scale(0.9);
+      position: relative;
+    }
+
+    @media (max-width: 900px) {
+      body.is-landscape .mobile-logo {
         display: block;
         position: absolute;
         top: 20px;
@@ -393,7 +389,7 @@
         z-index: 20;
       }
 
-      .container .form-box {
+      body.is-landscape .container .form-box {
         width: 100%;
         height: auto;
         position: absolute;
@@ -404,24 +400,24 @@
         transition: 0.3s ease-in-out;
       }
 
-      .info-content {
+      body.is-landscape .info-content {
         display: none !important;
       }
 
-      .form-box.Login {
+      body.is-landscape .form-box.Login {
         z-index: 15;
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
       }
 
-      .container.active .form-box.Login {
+      body.is-landscape .container.active .form-box.Login {
         opacity: 0;
         transform: translateY(-20px);
         pointer-events: none;
       }
 
-      .form-box.Register {
+      body.is-landscape .form-box.Register {
         z-index: 15;
         opacity: 0;
         transform: translateY(20px);
@@ -430,14 +426,14 @@
         padding-top: 0;
       }
 
-      .container.active .form-box.Register {
+      body.is-landscape .container.active .form-box.Register {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
       }
 
-      .form-box.Login .animation,
-      .form-box.Register .animation {
+      body.is-landscape .form-box.Login .animation,
+      body.is-landscape .form-box.Register .animation {
         transform: none !important;
         transition: none !important;
         opacity: 1 !important;
@@ -553,10 +549,15 @@
     document.addEventListener('DOMContentLoaded', () => {
       console.log("DOM ready");
 
-      /* Robust Orientation Check */
+      /* Aggressive Orientation Check */
       function handleOrientation() {
-        const isPortrait = window.innerHeight > window.innerWidth;
-        if (isPortrait) {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        /* Mobile thresholds */
+        const isMobile = width < 1000 || height < 600;
+        const isLandscape = width > height;
+
+        if (isMobile && !isLandscape) {
           document.body.classList.add('is-portrait');
           document.body.classList.remove('is-landscape');
         } else {
@@ -564,9 +565,19 @@
           document.body.classList.add('is-landscape');
         }
       }
+
+      /* Listen to all possible change events */
       window.addEventListener('resize', handleOrientation);
       window.addEventListener('orientationchange', handleOrientation);
+      if (screen.orientation) {
+        screen.orientation.addEventListener('change', handleOrientation);
+      }
+
+      /* Initial check */
       handleOrientation();
+      /* Secondary check to catch cases where metrics aren't ready */
+      setTimeout(handleOrientation, 200);
+      setTimeout(handleOrientation, 500);
 
       if (localStorage.getItem('growId')) {
         const loginGrowId = document.getElementById('loginGrowId');

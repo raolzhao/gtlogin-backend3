@@ -45,17 +45,20 @@ app.all('/player/register', function (req, res) {
 app.all('/player/login/dashboard', function (req, res) {
     const tData = {};
     try {
-        const uData = JSON.stringify(req.body).split('"')[1].split('\\n');
-        const uName = uData[0].split('|');
-        const uPass = uData[1].split('|');
+        const bodyStr = JSON.stringify(req.body);
+        if (bodyStr.length > 2 && bodyStr.includes('"')) {
+            const uData = bodyStr.split('"')[1].split('\\n');
+            const uName = uData[0].split('|');
+            const uPass = uData[1].split('|');
 
-        for (let i = 0; i < uData.length - 1; i++) {
-            const d = uData[i].split('|');
-            tData[d[0]] = d[1];
-        }
+            for (let i = 0; i < uData.length - 1; i++) {
+                const d = uData[i].split('|');
+                tData[d[0]] = d[1];
+            }
 
-        if (uName[1] && uPass[1]) {
-            res.redirect('/player/growid/login/validate');
+            if (uName[1] && uPass[1]) {
+                res.redirect('/player/growid/login/validate');
+            }
         }
     } catch (why) {
         console.log(`Warning: ${why}`);
